@@ -1,6 +1,4 @@
-{{ config(
-    materialized='table'
-) }}
+
 WITH operational_data AS (
     SELECT 
         date_date, 
