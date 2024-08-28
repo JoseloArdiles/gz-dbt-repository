@@ -1,5 +1,6 @@
 version: 2
 
+
 sources:
   - name: raw
     schema: gz_raw_data
@@ -38,8 +39,9 @@ sources:
             tests:
               - unique
               - not_null
-          
+   
 models:
+  
   - name: finance_days
     description: "Calculates daily financial metrics based on operational data"
     config:
@@ -87,3 +89,4 @@ models:
         description: "The calculated margin for each sale"
       - name: revenue
         description: "The revenue generated from the sale"
+ 
