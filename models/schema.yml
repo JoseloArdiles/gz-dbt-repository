@@ -11,6 +11,8 @@ sources:
         tests:
           - unique:
               column_name: "(orders_id || '_' || pdt_id)"
+          - not_null:
+              column_name: "(orders_id || '_' || pdt_id)"
         freshness: 
           warn_after: {count: 90, period: day}
         loaded_at_field: "CAST(date_date as TIMESTAMP)"
@@ -37,3 +39,47 @@ sources:
               - unique
               - not_null
           
+models:
+  - name: finance_days
+    description: "Calculates daily financial metrics based on operational data"
+    columns:
+      - name: date_date
+        description: "Primary key representing the date of the financial day"
+      - name: nb_transactions
+        description: "Number of transactions (distinct orders) for the day"
+      - name: average_basket
+        description: "Average basket size calculated as total turnover divided by the number of transactions"
+      - name: total_turnover
+        description: "Total revenue or turnover for the day"
+      - name: total_operational_margin
+        description: "Total operational margin for the day"
+      - name: total_margin
+        description: "Total margin for the day"
+
+  - name: int_orders_margin
+    description: "Calculates the margin per order based on sales and operational data"
+    columns:
+      - name: orders_id
+        description: "Primary key representing the unique order ID"
+      - name: margin
+        description: "The calculated margin for the order"
+      - name: operational_margin
+        description: "The operational margin for the order"
+
+  - name: int_orders_operational
+    description: "Joins sales margin data with shipping data to calculate operational margins per order"
+    columns:
+      - name: orders_id
+        description: "Primary key representing the unique order ID"
+      - name: operational_margin
+        description: "The operational margin calculated by adding margins and subtracting shipping costs"
+
+  - name: int_sales_margin
+    description: "Calculates the margin per sale based on revenue and purchase costs"
+    columns:
+      - name: orders_id
+        description: "Primary key representing the unique order ID"
+      - name: margin
+        description: "The calculated margin for each sale"
+      - name: revenue
+        description: "The revenue generated from the sale"
