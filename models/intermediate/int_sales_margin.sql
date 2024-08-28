@@ -1,13 +1,19 @@
 
 WITH sales_data AS (
     SELECT 
-        * 
+        date_date,
+        orders_id,
+        CAST(revenue AS FLOAT64) AS revenue,
+        pdt_id,  
+        quantity, 
     FROM 
         {{ ref('stg_raw__sales') }}  
 ),
 product_data AS (
     SELECT 
-        * 
+        products_id,
+        CAST(purchase_price AS FLOAT64) AS purchase_cost
+
     FROM 
         {{ ref('stg_raw__product') }}  
 )
@@ -15,12 +21,12 @@ product_data AS (
 SELECT 
     s.date_date,
     s.orders_id,
-    s.revenue,
+    revenue,
     s.pdt_id,  
     s.quantity,
-    CAST(p.purchase_price AS FLOAT64) AS purchase_price, 
-    (s.quantity * CAST(p.purchase_price AS FLOAT64)) AS purchase_cost,  
-    ((CAST(s.revenue AS FLOAT64)) - (s.quantity *( CAST(p.purchase_price AS FLOAT64)))) AS margin 
+    purchase_cost,  
+    (revenue - (s.quantity * purchase_cost)) AS margin,
+    
 FROM 
     sales_data AS s
 JOIN 
