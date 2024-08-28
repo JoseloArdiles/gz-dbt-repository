@@ -44,7 +44,7 @@ models:
     description: "Calculates daily financial metrics based on operational data"
     columns:
       - name: date_date
-        description: "Primary key representing the date of the financial day"
+        description: "Date of the financial day"
       - name: nb_transactions
         description: "Number of transactions (distinct orders) for the day"
       - name: average_basket
@@ -61,6 +61,7 @@ models:
     columns:
       - name: orders_id
         description: "Primary key representing the unique order ID"
+
       - name: margin
         description: "The calculated margin for the order"
       - name: operational_margin
@@ -70,6 +71,7 @@ models:
     description: "Joins sales margin data with shipping data to calculate operational margins per order"
     columns:
       - name: orders_id
+
         description: "Primary key representing the unique order ID"
       - name: operational_margin
         description: "The operational margin calculated by adding margins and subtracting shipping costs"
