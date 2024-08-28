@@ -17,10 +17,10 @@ WITH operational_data AS (
 SELECT 
     date_date,
     nb_transactions,  
-    SAFE_DIVIDE(turnover, nb_transactions) AS average_basket, 
-    turnover,  
-    operational_margin,  
-    margin  
+    Round(SAFE_DIVIDE(turnover, nb_transactions),2) AS average_basket, 
+    ROUND(turnover,2) AS turnover,  
+    ROUND(operational_margin) AS Operational_margin,  
+    ROUND(margin, 2) AS margin  
 FROM 
     operational_data
 ORDER BY date_date DESC
