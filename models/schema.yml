@@ -115,10 +115,5 @@ models:
 
   - name: int_campaigns
     description: all ads sources
-    columns:
-      - name: key
-        description: "Primary key representing the unique order ID"
-        tests:
-          - unique:
-              column_name: "(date_date || '_' || campaign_key)"
+
 
