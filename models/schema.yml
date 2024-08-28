@@ -42,6 +42,8 @@ sources:
 models:
   - name: finance_days
     description: "Calculates daily financial metrics based on operational data"
+    config:
+      materialized: table
     columns:
       - name: date_date
         description: "Date of the financial day"
